@@ -4,7 +4,7 @@
 #include "../include/utils.h"
 static const float GRAVITY = 900.0f;
 static const sf::IntRect dieFrame = {1024, 2, 44, 47};
-Player::Player(sf::Texture &texture) : network({3, 16, 16, 2})
+Player::Player(sf::Texture &texture) : network({3, 20, 20, 2})
 {
     sp.setTexture(texture);
     sp.setTextureRect(dinoFrames[currFrame]);

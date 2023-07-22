@@ -47,6 +47,7 @@ void Game::events()
         case sf::Event::KeyPressed:
             if (ev.key.code == sf::Keyboard::Q)
             {
+                for (auto& player : population) if(!player.hasDead()) player.score = score.getScore();
                 gameOver = true;
             }
         default:
@@ -126,7 +127,7 @@ void Game::update(float dt)
 }
 void Game::setCactusCoords(float x)
 {
-	cactus.setPosition({ x, GROUND - cactus.getGlobalBounds().height });
+    cactus.setPosition({ x, GROUND - cactus.getGlobalBounds().height });
 }
 void Game::restartPlayers()
 {
@@ -166,6 +167,7 @@ void Game::applyGeneticAlgo()
     std::sort(population.begin(), population.end(), [](auto &p1, auto p2)
         { return p1.score > p2.score; });
     int parents = get_random_number(20, 40);
+    std::cout << population[0].score << "\n";
     std::vector<Player> nextGen;
     for (int i = 0; i < parents; i++)
     {

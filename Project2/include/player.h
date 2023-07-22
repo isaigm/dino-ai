@@ -31,14 +31,12 @@ public:
     int score = 0;
     bool hasDead();
     MLP network;
-    int d = 0;
 private:
     sf::Sprite sp;
     int currFrame = 0;
     float playerSpeed = 200;
     float totalDt = 0;
     float x, y, ground, ySpeed;
-    bool dead = false;
-    
+    bool dead = false;   
 };
 #endif
