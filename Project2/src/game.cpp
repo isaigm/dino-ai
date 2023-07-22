@@ -1,5 +1,5 @@
-#include "game.h"
-#include "utils.h"
+#include "../include/game.h"
+#include "../include/utils.h"
 Game::Game(sf::Texture& spritesheet_) : spritesheet(spritesheet_),
 btn(spritesheet_), score(spritesheet_), bg(spritesheet_), cactus(spritesheet_), gameOverScreen(spritesheet_), ground(sf::FloatRect(0, 12, WIDTH, HEIGHT / 2), playerSpeed),
 sky(sf::FloatRect(0, 0, WIDTH, HEIGHT / 2), 25), cloudManager(N_CLOUDS, spritesheet_, sky), window(sf::VideoMode(WIDTH, HEIGHT), "Training FNN")

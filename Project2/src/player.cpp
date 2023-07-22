@@ -1,7 +1,7 @@
-#include "player.h"
-#include "collision.h"
+#include "../include/player.h"
+#include "../include/collision.h"
 #include "iostream"
-#include "utils.h"
+#include "../include/utils.h"
 static const float GRAVITY = 900.0f;
 static const sf::IntRect dieFrame = {1024, 2, 44, 47};
 Player::Player(sf::Texture &texture) : network({3, 16, 16, 2})

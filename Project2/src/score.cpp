@@ -1,4 +1,4 @@
-#include "score.h"
+#include "../include/score.h"
 Score::Score(sf::Texture& texture)
 {
     hi.setTexture(texture);

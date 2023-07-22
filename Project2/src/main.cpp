@@ -1,5 +1,5 @@
-#include "game.h"
-
+#include "../include/game.h"
+static const char* SPRITESHEET_FILE = "sprites.png";
 int main()
 {  
     sf::Texture spritesheet;

@@ -18,6 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\background.h" />
+    <ClInclude Include="include\button.h" />
+    <ClInclude Include="include\cloud_manager.h" />
+    <ClInclude Include="include\collision.h" />
+    <ClInclude Include="include\constants.h" />
+    <ClInclude Include="include\game.h" />
+    <ClInclude Include="include\mlp.h" />
+    <ClInclude Include="include\player.h" />
+    <ClInclude Include="include\score.h" />
+    <ClInclude Include="include\sfx.h" />
+    <ClInclude Include="include\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\cloud_manager.cpp" />
+    <ClCompile Include="src\collision.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\score.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -127,27 +148,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="cloud_manager.cpp" />
-    <ClCompile Include="collision.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="score.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="background.h" />
-    <ClInclude Include="button.h" />
-    <ClInclude Include="cloud_manager.h" />
-    <ClInclude Include="collision.h" />
-    <ClInclude Include="constants.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="mlp.h" />
-    <ClInclude Include="player.h" />
-    <ClInclude Include="score.h" />
-    <ClInclude Include="sfx.h" />
-    <ClInclude Include="utils.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

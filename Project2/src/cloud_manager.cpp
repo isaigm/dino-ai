@@ -1,5 +1,5 @@
-#include "cloud_manager.h"
-#include "utils.h"
+#include "../include/cloud_manager.h"
+#include "../include/utils.h"
 CloudManager::CloudManager(int n, sf::Texture &spritesheet_, Background &sky_) : spritesheet(spritesheet_), sky(sky_), sizeClouds(n)
 {
     init();

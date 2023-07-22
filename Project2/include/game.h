@@ -7,7 +7,6 @@
 #include "constants.h"
 #include "score.h"
 #include "cloud_manager.h"
-static const char* SPRITESHEET_FILE = "sprites.png";
 static const int N_CLOUDS = 5;
 static const float GROUND = 125 + 47;
 static const int POPULATION_SIZE = 100;
