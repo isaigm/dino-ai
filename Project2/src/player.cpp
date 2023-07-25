@@ -76,6 +76,9 @@ void Player::restart()
     playerSpeed = 200;
     dead = false;
     score = 0;
+    currFrame = 0;
+    sp.setPosition(x, y);
+    sp.setTextureRect(dinoFrames[currFrame]);
 }
 
 void Player::draw(sf::RenderTarget &target)
@@ -87,13 +90,12 @@ bool Player::collidesWith(sf::Sprite &entity)
     return Collision::PixelPerfectTest(sp, entity);
 }
 
-void Player::makeMove(float distTo)
+void Player::makeMove(float distTo, float cactusWidth)
 {
-    float sign = distTo > 0 ? 1 : 0;
     Eigen::MatrixXf input(3, 1);
     input(0, 0) = isOnGround;
-    input(1, 0) = sign;
     input(2, 0) = distTo;
+    input(3, 0) = cactusWidth;
     auto output = network.feedforward(input);
     float jump = output(0, 0);
     float notJump = output(1, 0);

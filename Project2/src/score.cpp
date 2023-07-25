@@ -55,7 +55,10 @@ void Score::restart()
 {
     _100more = false;
     score = 0;
+    totalTime = 0;
+    blinkTime = 0;
     visible = true;
+    cnt = 0;
 }
 bool Score::hasUpdated()
 {

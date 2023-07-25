@@ -22,14 +22,14 @@ public:
     void update(float dt);
     void restart();
    
-    void makeMove(float distTo);
+    void makeMove(float distTo, float cactusWidth);
     float getX() const;
     float getY() const;
     void die();
     bool collidesWith(sf::Sprite &);
+    bool hasDead();
     bool isOnGround = true;
     int score = 0;
-    bool hasDead();
     MLP network;
 private:
     sf::Sprite sp;

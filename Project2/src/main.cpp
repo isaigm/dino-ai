@@ -1,4 +1,5 @@
 #include "../include/game.h"
+#include <iostream>
 static const char* SPRITESHEET_FILE = "sprites.png";
 int main()
 {  

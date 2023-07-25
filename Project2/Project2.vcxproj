@@ -20,24 +20,28 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\background.h" />
-    <ClInclude Include="include\button.h" />
-    <ClInclude Include="include\cloud_manager.h" />
+    <ClInclude Include="include\cactus_spawner.h" />
+    <ClInclude Include="include\cloud_spawner.h" />
     <ClInclude Include="include\collision.h" />
     <ClInclude Include="include\constants.h" />
     <ClInclude Include="include\game.h" />
     <ClInclude Include="include\mlp.h" />
+    <ClInclude Include="include\moving_floor.h" />
     <ClInclude Include="include\player.h" />
     <ClInclude Include="include\score.h" />
-    <ClInclude Include="include\sfx.h" />
+    <ClInclude Include="include\spawner.h" />
     <ClInclude Include="include\utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\cloud_manager.cpp" />
+    <ClCompile Include="src\cactus_spawner.cpp" />
+    <ClCompile Include="src\cloud_spawner.cpp" />
     <ClCompile Include="src\collision.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\moving_floor.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\score.cpp" />
+    <ClCompile Include="src\spawner.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,4 +1,5 @@
 #include "constants.h"
+#include <SFML/Graphics.hpp>
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 class Background
