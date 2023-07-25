@@ -37,7 +37,6 @@ void CactusSpawner::restart()
 }
 void CactusSpawner::setCactusPos(sf::Sprite& cactus, float x)
 {
-    
     cactus.setPosition({ x, GROUND - cactus.getGlobalBounds().height });
 }
 sf::FloatRect CactusSpawner::getNextCactus(Player& p)

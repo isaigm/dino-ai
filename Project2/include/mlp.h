@@ -20,6 +20,7 @@ static Eigen::MatrixXf sigmoid(Eigen::MatrixXf&& x)
 
 struct MLP
 {
+    MLP(){}
     MLP(std::initializer_list<int> layers_) : layers(layers_)
     {
         int numberOfLayers = layers.size();
@@ -46,6 +47,5 @@ struct MLP
     std::vector<int> layers;
     std::vector<Eigen::MatrixXf> weights;
     std::vector<Eigen::MatrixXf> biases;
-
 };
 #endif

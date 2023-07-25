@@ -1,10 +1,8 @@
 #include "../include/player.h"
 #include "../include/collision.h"
-#include "iostream"
 #include "../include/utils.h"
-static const float GRAVITY = 900.0f;
-static const sf::IntRect dieFrame = {1024, 2, 44, 47};
-Player::Player(sf::Texture &texture) : network({3, 20, 20, 2})
+
+Player::Player(sf::Texture &texture) : network({2, 20, 20, 2})
 {
     sp.setTexture(texture);
     sp.setTextureRect(dinoFrames[currFrame]);
@@ -18,7 +16,7 @@ void Player::die()
     dead = true;
     sp.setTextureRect(dieFrame);
 }
-bool Player::hasDead()
+bool Player::hasDied()
 {
     return dead;
 }
@@ -92,10 +90,10 @@ bool Player::collidesWith(sf::Sprite &entity)
 
 void Player::makeMove(float distTo, float cactusWidth)
 {
-    Eigen::MatrixXf input(3, 1);
+    Eigen::MatrixXf input(2, 1);
     input(0, 0) = isOnGround;
-    input(2, 0) = distTo;
-    input(3, 0) = cactusWidth;
+    input(1, 0) = distTo;
+
     auto output = network.feedforward(input);
     float jump = output(0, 0);
     float notJump = output(1, 0);
@@ -153,7 +151,6 @@ void Player::mutate()
                 mat(i, j) += floatDistro(defEngine);
             }
         }
-       
         for (int i = 0; i < bias.rows(); i++)
         {
             bias(i, 0) += floatDistro(defEngine);

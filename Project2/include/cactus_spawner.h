@@ -25,7 +25,5 @@ private:
 	void setCactusPos(sf::Sprite& cactus, float x);
 	sf::Texture& spritesheet;
 	float lastCoords;
-
-
 };
 #endif

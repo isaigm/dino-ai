@@ -7,32 +7,36 @@
 #include "cloud_spawner.h"
 #include "cactus_spawner.h"
 #include "moving_floor.h"
+#include "info.h"
 static const int N_CLOUDS = 5;
-static const int POPULATION_SIZE = 100;
+static const int POPULATION_SIZE = 150;
 static const sf::IntRect GAME_OVER_FRAME = { 655, 15, 191, 11 };
 static float playerSpeed = 200;
 
 class Game
 {
 public:
-	Game(sf::Texture& spritesheet);
+	Game();
 	void run();
+	const Info &getInfo();
 private:
 	void events();
 	void update(float dt);
 	void render(float dt);
-	void setCactusCoords(float x);
 	void restartPlayers();
 	void updatePlayers(float);
 	void renderPlayers();
 	int  deadPlayers();
 	void applyGeneticAlgo();
-	sf::Texture &spritesheet;
+	sf::Texture spritesheet;
+	Info info;
+	bool gameOver = false;
 	Score score;
 	Background ground;
 	Background sky;
 	sf::RenderWindow window;
-	bool gameOver = false;
+	sf::Font font;
+	sf::Text infoText;
 	std::vector<Player> population;
 	MovingFloor movingFloor;
 	CloudSpawner cloudSpawner;

@@ -25,6 +25,7 @@
     <ClInclude Include="include\collision.h" />
     <ClInclude Include="include\constants.h" />
     <ClInclude Include="include\game.h" />
+    <ClInclude Include="include\info.h" />
     <ClInclude Include="include\mlp.h" />
     <ClInclude Include="include\moving_floor.h" />
     <ClInclude Include="include\player.h" />

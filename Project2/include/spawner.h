@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #ifndef SPAWNER_H
 #define SPAWNER_H
-
 class Spawner
 {
 public:
@@ -12,9 +11,7 @@ public:
 	virtual void restart();
 	void render(sf::RenderTarget& rt);
 protected:
-
 	std::vector<sf::Sprite> objects;
 	int sizeObjects;
 };
-
 #endif 
