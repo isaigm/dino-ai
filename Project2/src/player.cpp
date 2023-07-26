@@ -2,7 +2,7 @@
 #include "../include/collision.h"
 #include "../include/utils.h"
 
-Player::Player(sf::Texture &texture) : network({2, 20, 20, 2})
+Player::Player(sf::Texture &texture) : network({3, 16, 2})
 {
     sp.setTexture(texture);
     sp.setTextureRect(dinoFrames[currFrame]);
@@ -90,9 +90,10 @@ bool Player::collidesWith(sf::Sprite &entity)
 
 void Player::makeMove(float distTo, float cactusWidth)
 {
-    Eigen::MatrixXf input(2, 1);
+    Eigen::MatrixXf input(3, 1);
     input(0, 0) = isOnGround;
     input(1, 0) = distTo;
+    input(2, 0) = cactusWidth;
 
     auto output = network.feedforward(input);
     float jump = output(0, 0);

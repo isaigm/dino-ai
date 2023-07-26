@@ -10,7 +10,7 @@ static const sf::IntRect dinoFrames[] =
     {848, 2, 44, 47}
 };
 static const sf::IntRect dieFrame = { 1024, 2, 44, 47 };
-static const float GRAVITY = 900.0f;
+static const float GRAVITY = 1400.0f;
 static std::default_random_engine defEngine;
 static std::uniform_real_distribution<float> floatDistro(-0.1, 0.1);
 class Player

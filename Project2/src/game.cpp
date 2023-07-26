@@ -15,7 +15,7 @@ sky(sf::FloatRect(0, 0, WIDTH, HEIGHT / 2), 25), movingFloor(spritesheet, player
     infoText.setFont(font);
     infoText.setPosition(10, 200);
     infoText.setCharacterSize(24);
-    infoText.setFillColor(sf::Color::Black);
+    infoText.setFillColor(sf::Color::White);
 	window.setVerticalSyncEnabled(true);
     ground.getView().setViewport(sf::FloatRect(0, 0, 1.0f, 0.5f));
     sky.getView().setViewport(sf::FloatRect(0, 0, 1.0f, 0.5f));
@@ -31,6 +31,7 @@ void Game::run()
 	while (window.isOpen())
 	{
 		float dt = clock.restart().asSeconds();
+        window.setTitle(std::to_string(1.0f / dt));
 		events();
 		update(dt);
 		render(dt);
@@ -59,7 +60,7 @@ void Game::events()
 }
 void Game::render(float dt)
 {
-    window.clear(sf::Color::White);
+    window.clear(sf::Color::Black);
     window.setView(sky.getView());
     cloudSpawner.render(window);
     window.setView(ground.getView());
@@ -151,8 +152,8 @@ void Game::applyGeneticAlgo()
     std::sort(population.begin(), population.end(), [](auto &p1, auto &p2)
         { return p1.score > p2.score; });
     int parents = get_random_number(20, 70);
-   
     info.bestScore = std::max(info.bestScore, population[0].score);
+  
     std::vector<Player> nextGen;
     for (int i = 0; i < parents; i++)
     {
@@ -164,7 +165,7 @@ void Game::applyGeneticAlgo()
         int i2 = rand() % population.size();
         Player newPlayer(spritesheet);
         newPlayer.crossover(population[i1], population[i2]);
-        if (rand() % 10 < 4)
+        if (rand() % 10 <= 3)
             newPlayer.mutate();
         
         nextGen.push_back(std::move(newPlayer));
