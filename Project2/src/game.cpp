@@ -12,6 +12,7 @@ sky(sf::FloatRect(0, 0, WIDTH, HEIGHT / 2), 25), movingFloor(spritesheet, player
         exit(-1);
     }
     info.maxPopulation = POPULATION_SIZE;
+    info.alivePlayers = POPULATION_SIZE;
     infoText.setFont(font);
     infoText.setPosition(10, 200);
     infoText.setCharacterSize(24);
@@ -88,6 +89,7 @@ void Game::update(float dt)
     {
         applyGeneticAlgo();
         info.currentGen++;
+        info.alivePlayers = POPULATION_SIZE;
         gameOver = false;
         playerSpeed = 200;
         score.restart();
@@ -105,9 +107,7 @@ void Game::update(float dt)
     ground.update(dt);
     movingFloor.update(dt);
     updatePlayers(dt);
-    int fPlayers = deadPlayers();
-    gameOver = fPlayers == POPULATION_SIZE;
-    info.alivePlayers = POPULATION_SIZE - fPlayers;
+    gameOver = info.alivePlayers == 0;
     cloudSpawner.relocate(sky);
     cactusSpawner.relocate(ground);
 }
@@ -132,20 +132,12 @@ void Game::updatePlayers(float dt)
             player.animate(dt);
             if(cactusSpawner.collidesWithPlayer(player))
             {
-               player.die();
-               player.score = score.getScore();
+                info.alivePlayers--;
+                player.die();
+                player.score = score.getScore();
             }
         }
     }
-}
-int Game::deadPlayers()
-{
-    int cnt = 0;
-    for (auto& player : population)
-    {
-        if (player.hasDied()) cnt++;
-    }
-    return cnt;
 }
 void Game::applyGeneticAlgo()
 {
@@ -161,8 +153,8 @@ void Game::applyGeneticAlgo()
     }
     for (int i = 0; i < POPULATION_SIZE - parents; i++)
     {
-        int i1 = rand() % population.size();
-        int i2 = rand() % population.size();
+        int i1 = get_random_number(0, parents);
+        int i2 = get_random_number(0, parents);
         Player newPlayer(spritesheet);
         newPlayer.crossover(population[i1], population[i2]);
         if (rand() % 10 <= 3)

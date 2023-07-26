@@ -26,7 +26,6 @@ private:
 	void restartPlayers();
 	void updatePlayers(float);
 	void renderPlayers();
-	int  deadPlayers();
 	void applyGeneticAlgo();
 	sf::Texture spritesheet;
 	Info info;
