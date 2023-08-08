@@ -36,3 +36,7 @@ void MovingFloor::restart()
     mainBg = true;
     traveledDistance = 0;
 }
+void MovingFloor::setSpeed(float _speed)
+{
+    speed = _speed;
+}

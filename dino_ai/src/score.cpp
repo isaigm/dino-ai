@@ -62,12 +62,9 @@ void Score::restart()
 }
 bool Score::hasUpdated()
 {
-    if (_100more)
-    {
-        _100more = false;
-        return true;
-    }
-    return false;
+    bool temp = _100more;
+    _100more = false;
+    return temp;
 }
 void Score::update(float dt)
 {

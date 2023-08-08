@@ -11,19 +11,22 @@ sky(sf::FloatRect(0, 0, WIDTH, HEIGHT / 2), 25), movingFloor(spritesheet, player
         std::cerr << "no se pudo cargar algun archivo de recursos\n";
         exit(-1);
     }
+    window.setVerticalSyncEnabled(true);
+
     info.maxPopulation = POPULATION_SIZE;
     info.alivePlayers = POPULATION_SIZE;
+    
     infoText.setFont(font);
-    infoText.setPosition(10, 200);
+    infoText.setPosition(10, 170);
     infoText.setCharacterSize(24);
     infoText.setFillColor(sf::Color::White);
-	window.setVerticalSyncEnabled(true);
     ground.getView().setViewport(sf::FloatRect(0, 0, 1.0f, 0.5f));
     sky.getView().setViewport(sf::FloatRect(0, 0, 1.0f, 0.5f));
     population.reserve(POPULATION_SIZE);
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
         population.emplace_back(spritesheet);
+        population.back().setSpeed(playerSpeed);
     }
 }
 void Game::run()
@@ -71,7 +74,7 @@ void Game::render(float dt)
     window.setView(window.getDefaultView());
     score.draw(window);
     char data[256];
-    snprintf(data, sizeof(data), "Pop size: %d\nCurrent generation: %d\nBest score: %d\nAlive players: %d", info.maxPopulation, info.currentGen, info.bestScore, info.alivePlayers);
+    snprintf(data, sizeof(data), "Pop size: %d\nCurrent generation: %d\nBest score: %d\nAlive players: %d\nCurr speed: %.3f", info.maxPopulation, info.currentGen, info.bestScore, info.alivePlayers, playerSpeed);
     infoText.setString(data);
     window.draw(infoText);
     window.display();
@@ -91,7 +94,7 @@ void Game::update(float dt)
         info.currentGen++;
         info.alivePlayers = POPULATION_SIZE;
         gameOver = false;
-        playerSpeed = 200;
+        playerSpeed = 300;
         score.restart();
         restartPlayers();
         movingFloor.restart();
@@ -102,6 +105,7 @@ void Game::update(float dt)
         return;
     }
     ground.setSpeed(playerSpeed);
+    movingFloor.setSpeed(playerSpeed);
     score.update(dt);
     sky.update(dt);
     ground.update(dt);
@@ -110,6 +114,7 @@ void Game::update(float dt)
     gameOver = info.alivePlayers == 0;
     cloudSpawner.relocate(sky);
     cactusSpawner.relocate(ground);
+    if (score.hasUpdated()) playerSpeed += 2;
 }
 void Game::restartPlayers()
 {
@@ -125,9 +130,11 @@ void Game::updatePlayers(float dt)
         if (!player.hasDied())
         {
             auto nextCactus = cactusSpawner.getNextCactus(player);
-            float dist = nextCactus.getPosition().x - player.getX();
+            float dist = (nextCactus.getPosition().x - player.getX()) / 1000.0f;
             float cactusWidth = nextCactus.getSize().x / 75.0f;
-            player.makeMove(dist / 1000.0f, cactusWidth);
+            float cactusHeight = nextCactus.getSize().y / 50.0f;
+            player.setSpeed(playerSpeed);
+            player.makeMove(dist, cactusHeight, cactusWidth);
             player.update(dt);
             player.animate(dt);
             if(cactusSpawner.collidesWithPlayer(player))
@@ -143,9 +150,8 @@ void Game::applyGeneticAlgo()
 {
     std::sort(population.begin(), population.end(), [](auto &p1, auto &p2)
         { return p1.score > p2.score; });
-    int parents = get_random_number(20, 70);
+    int parents = 400;
     info.bestScore = std::max(info.bestScore, population[0].score);
-  
     std::vector<Player> nextGen;
     for (int i = 0; i < parents; i++)
     {
@@ -153,18 +159,23 @@ void Game::applyGeneticAlgo()
     }
     for (int i = 0; i < POPULATION_SIZE - parents; i++)
     {
-        int i1 = get_random_number(0, parents);
-        int i2 = get_random_number(0, parents);
+        int i1;
+        int i2;
         Player newPlayer(spritesheet);
+        if (rand() % 10 <= 6)
+        {
+            i1 = get_random_number(0, parents);
+            i2 = get_random_number(0, parents);
+        }
+        else
+        {
+            i1 = get_random_number(parents + 1, POPULATION_SIZE - 1);
+            i2 = get_random_number(parents + 1, POPULATION_SIZE - 1);
+        }
         newPlayer.crossover(population[i1], population[i2]);
-        if (rand() % 10 <= 3)
-            newPlayer.mutate();
-        
+        if (rand() % 10 < 3)
+            newPlayer.mutate();   
         nextGen.push_back(std::move(newPlayer));
     }
     population = std::move(nextGen);  
-}
-const Info &Game::getInfo()
-{
-    return info;
 }

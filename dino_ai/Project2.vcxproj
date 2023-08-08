@@ -29,6 +29,7 @@
     <ClInclude Include="include\mlp.h" />
     <ClInclude Include="include\moving_floor.h" />
     <ClInclude Include="include\player.h" />
+    <ClInclude Include="include\pterodactylus.h" />
     <ClInclude Include="include\score.h" />
     <ClInclude Include="include\spawner.h" />
     <ClInclude Include="include\utils.h" />
@@ -41,6 +42,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\moving_floor.cpp" />
     <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\pterodactylus.cpp" />
     <ClCompile Include="src\score.cpp" />
     <ClCompile Include="src\spawner.cpp" />
   </ItemGroup>
@@ -48,7 +50,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{d2cc14a6-f890-4a09-a4d9-72c2b450da91}</ProjectGuid>
-    <RootNamespace>Project2</RootNamespace>
+    <RootNamespace>dino_ai</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>dino_ai</ProjectName>
   </PropertyGroup>

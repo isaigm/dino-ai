@@ -10,8 +10,7 @@ static const sf::IntRect cactusFrames[] =
  {382, 2, 25, 50},
  {407, 2, 75, 50} };
 static const int N_CACTUS = sizeof(cactusFrames) / sizeof(sf::IntRect);
-static const float GROUND = 125 + 47;
-static float MIN_SEPARATION = 100;
+static const float MIN_SEPARATION = 120;
 class CactusSpawner : public Spawner
 {
 public:

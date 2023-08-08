@@ -1,5 +1,6 @@
 #include <vector>
 #include <Eigen/Dense>
+#include <iostream>
 #ifndef  MLP_H
 #define MLP_H
 static float sigmoid(float x)
@@ -28,10 +29,10 @@ struct MLP
         weights.reserve(numberOfLayers - 1);
         for (int i = 1; i < numberOfLayers; i++)
         {
-            biases.emplace_back(layers[i], 1);
-            biases.back().setRandom();
-            weights.emplace_back(layers[i], layers[i - 1]);
-            weights.back().setRandom();
+            Eigen::MatrixXf weight = Eigen::MatrixXf::Random(layers[i], layers[i - 1]);
+            Eigen::MatrixXf bias = Eigen::MatrixXf::Random(layers[i], 1);
+            biases.push_back(std::move(bias));
+            weights.push_back(std::move(weight));
         }
     }
     Eigen::MatrixXf feedforward(const Eigen::MatrixXf& input)

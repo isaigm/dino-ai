@@ -8,6 +8,7 @@ public:
 	void render(sf::RenderTarget& rt);
 	void update(float dt);
 	void restart();
+	void setSpeed(float speed);
 private:
 	sf::Sprite currFloor, nextFloor;
 	float traveledDistance = 0; // para saber que tanto del fondo actual, que mide 1200 pixeles de ancho, se ha recorrido
